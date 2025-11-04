@@ -1,0 +1,14 @@
+-- Flyway migration file
+-- Naming convention: V{version}__{description}.sql
+-- Example: V1__init.sql, V2__add_users_table.sql
+
+-- This is a placeholder migration file
+-- Replace with your actual database schema
+
+-- Example:
+-- CREATE TABLE IF NOT EXISTS example (
+--     id BIGSERIAL PRIMARY KEY,
+--     name VARCHAR(255) NOT NULL,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+
