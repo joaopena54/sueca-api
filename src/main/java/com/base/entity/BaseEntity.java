@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 
@@ -23,9 +25,11 @@ public class BaseEntity {
     )
     private long id;
 
+    @CreationTimestamp
     @Column(name = "created_date")
     private Instant createdDate;
 
+    @UpdateTimestamp
     @Column(name = "updated_date")
     private Instant updatedDate;
 }

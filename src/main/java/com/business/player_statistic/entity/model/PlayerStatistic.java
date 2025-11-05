@@ -28,5 +28,9 @@ public class PlayerStatistic extends BaseEntity {
 
     @Column(name = "matches_lost")
     private int matchesLost = 0;
+
+    public PlayerStatistic(User user) {
+        this.user = user;
+    }
 }
 
