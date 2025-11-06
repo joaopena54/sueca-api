@@ -12,29 +12,26 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class GetUserProfileInfoUseCase {
 
-    private final UserDatabaseGateway userDatabaseGateway;
-    private final PlayerStatisticsGateway playerStatisticsGateway;
+  private final UserDatabaseGateway userDatabaseGateway;
+  private final PlayerStatisticsGateway playerStatisticsGateway;
 
-    public UserProfileDTO execute(Jwt jwt) {
-        String userId = jwt.getSubject();
+  public UserProfileDTO execute(Jwt jwt) {
+    String userId = jwt.getSubject();
 
-        return userDatabaseGateway.getUserProfile(userId)
-                .orElse(createUser(jwt));
-    }
+    return userDatabaseGateway.getUserProfile(userId).orElse(createUser(jwt));
+  }
 
-    @Transactional
-    public UserProfileDTO createUser(Jwt jwt) {
-        String id = jwt.getSubject();
-        String firstName = jwt.getClaimAsString("given_name");
-        String lastName = jwt.getClaimAsString("family_name");
-        String email = jwt.getClaimAsString("email");
-        
-        String username = firstName + " " + lastName;
+  @Transactional
+  public UserProfileDTO createUser(Jwt jwt) {
+    String id = jwt.getSubject();
+    String firstName = jwt.getClaimAsString("given_name");
+    String lastName = jwt.getClaimAsString("family_name");
+    String email = jwt.getClaimAsString("email");
 
-        UserProfileDTO userProfileDTO = userDatabaseGateway.create(id, username, email);
-        playerStatisticsGateway.create(id);
-        return userProfileDTO;
+    String username = firstName + " " + lastName;
 
-    }
+    UserProfileDTO userProfileDTO = userDatabaseGateway.create(id, username, email);
+    playerStatisticsGateway.create(id);
+    return userProfileDTO;
+  }
 }
-

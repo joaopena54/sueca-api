@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SuecaApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SuecaApiApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(SuecaApiApplication.class, args);
+  }
 }

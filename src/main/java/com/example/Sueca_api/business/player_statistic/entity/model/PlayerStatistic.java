@@ -16,22 +16,20 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PlayerStatistic extends BaseEntity {
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false, unique = true)
-    private User user;
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable = false, unique = true)
+  private User user;
 
-    @Column(name = "total_matches")
-    private int totalMatches = 0;
+  @Column(name = "total_matches")
+  private int totalMatches = 0;
 
-    @Column(name = "matches_won")
-    private int matchesWon = 0;
+  @Column(name = "matches_won")
+  private int matchesWon = 0;
 
-    @Column(name = "matches_lost")
-    private int matchesLost = 0;
+  @Column(name = "matches_lost")
+  private int matchesLost = 0;
 
-    public PlayerStatistic(User user) {
-        this.user = user;
-    }
+  public PlayerStatistic(User user) {
+    this.user = user;
+  }
 }
-
-

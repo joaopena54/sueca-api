@@ -10,15 +10,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class PlayerStatisticsGateway {
 
-    private final PlayerStatisticRepository playerStatisticRepository;
-    private final EntityManager entityManager;
+  private final PlayerStatisticRepository playerStatisticRepository;
+  private final EntityManager entityManager;
 
-    public void create(String userId) {
+  public void create(String userId) {
 
-        User user = entityManager.getReference(User.class, userId);
-        PlayerStatistic playerStatistic = new PlayerStatistic(user);
-        playerStatisticRepository.save(playerStatistic);
-
-    }
+    User user = entityManager.getReference(User.class, userId);
+    PlayerStatistic playerStatistic = new PlayerStatistic(user);
+    playerStatisticRepository.save(playerStatistic);
+  }
 }
-
