@@ -29,6 +29,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                    "/swagger-ui/**",
+                    "/swagger-ui.html",
+                    "/v3/api-docs/**",
+                    "/docs",
+                    "/docs/**"
+                ).permitAll()
+                .anyRequest().authenticated()
+            )
             .oauth2ResourceServer(oauth2 -> oauth2
                 .jwt(jwt -> jwt
                     .jwtAuthenticationConverter(jwtAuthenticationConverter())
@@ -66,20 +76,24 @@ public class SecurityConfig {
 
             Stream<String> clientRoles = Stream.empty();
             if (resourceAccess != null) {
-
-                String clientId = jwt.getAudience() != null && !jwt.getAudience().isEmpty()
-                    ? jwt.getAudience().getFirst()
-                    : null;
-                
-                if (clientId != null) {
-                    @SuppressWarnings("unchecked")
-                    Map<String, Object> clientAccess = (Map<String, Object>) resourceAccess.get(clientId);
-                    if (clientAccess != null && clientAccess.containsKey("roles")) {
+                // Extract roles from all clients in resource_access
+                clientRoles = resourceAccess.entrySet().stream()
+                    .filter(entry -> {
+                        Object value = entry.getValue();
+                        if (value instanceof Map) {
+                            @SuppressWarnings("unchecked")
+                            Map<String, Object> clientAccess = (Map<String, Object>) value;
+                            return clientAccess.containsKey("roles");
+                        }
+                        return false;
+                    })
+                    .flatMap(entry -> {
+                        @SuppressWarnings("unchecked")
+                        Map<String, Object> clientAccess = (Map<String, Object>) entry.getValue();
                         @SuppressWarnings("unchecked")
                         List<String> roles = (List<String>) clientAccess.get("roles");
-                        clientRoles = roles.stream();
-                    }
-                }
+                        return roles != null ? roles.stream() : Stream.empty();
+                    });
             }
             
             return Stream.concat(realmRoles, clientRoles)
