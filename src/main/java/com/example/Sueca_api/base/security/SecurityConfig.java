@@ -76,7 +76,7 @@ public class SecurityConfig {
 
             Stream<String> clientRoles = Stream.empty();
             if (resourceAccess != null) {
-                // Extract roles from all clients in resource_access
+
                 clientRoles = resourceAccess.entrySet().stream()
                     .filter(entry -> {
                         Object value = entry.getValue();

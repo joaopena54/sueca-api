@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, String> {
 
-    @Query("SELECT new com.example.Sueca_api.business.user.dto.UserProfileDTO(u.id, u.username, u.email) from User u where u.id = :userId")
+    @Query("SELECT new com.example.Sueca_api.business.user.dto.UserProfileDTO(u.id, u.username, u.email) FROM User u WHERE u.id = :userId")
     Optional<UserProfileDTO> getUserProfile(String userId);
 
 }

@@ -5,6 +5,7 @@ import com.example.Sueca_api.business.user.dto.UserProfileDTO;
 import jakarta.annotation.security.RolesAllowed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +17,11 @@ public class UserResource {
 
     private final GetUserProfileInfoUseCase getUserProfileInfoUseCase;
 
-    @RolesAllowed("User")
+    @RolesAllowed("user")
     @GetMapping("/profile")
-    public UserProfileDTO getUserProfile(Jwt jwt){
+    public UserProfileDTO getUserProfile(final JwtAuthenticationToken jwt){
 
-        return  getUserProfileInfoUseCase.execute(jwt);
+        return  getUserProfileInfoUseCase.execute(jwt.getToken());
 
     }
 }
