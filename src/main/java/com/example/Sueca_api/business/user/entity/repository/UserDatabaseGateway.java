@@ -23,4 +23,9 @@ public class UserDatabaseGateway {
     userRepository.save(user);
     return new UserProfileDTO(id, username, email);
   }
+
+  public boolean exists(String userId) {
+
+    return userRepository.existsById(userId);
+  }
 }
