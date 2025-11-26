@@ -27,3 +27,4 @@ public class BaseEntity {
   @Column(name = "updated_date")
   private Instant updatedDate;
 }
+

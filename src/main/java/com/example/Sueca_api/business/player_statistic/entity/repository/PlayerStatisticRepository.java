@@ -4,3 +4,4 @@ import com.example.Sueca_api.business.player_statistic.entity.model.PlayerStatis
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PlayerStatisticRepository extends JpaRepository<PlayerStatistic, Long> {}
+
