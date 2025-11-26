@@ -29,4 +29,3 @@ public class UserDatabaseGateway {
     return userRepository.existsById(userId);
   }
 }
-

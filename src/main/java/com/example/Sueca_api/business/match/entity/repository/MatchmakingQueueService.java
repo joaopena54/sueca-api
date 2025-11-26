@@ -20,13 +20,16 @@ public class MatchmakingQueueService {
     List<String> players = matchRedisGateway.addToQueueAndPopIfReady(userId);
 
     if (players.size() == REQUIRED_PLAYERS) {
-      log.log(Level.INFO, "Found %d players ready for match: %s".formatted( players.size(), players));
+      log.log(
+          Level.INFO, "Found %d players ready for match: %s".formatted(players.size(), players));
     } else {
       long queueSize = matchRedisGateway.getMatchmakingQueueSize();
-      log.log(Level.FINE, "Player %s added to queue. Queue size: %d/%d".formatted(userId, queueSize,REQUIRED_PLAYERS));
+      log.log(
+          Level.FINE,
+          "Player %s added to queue. Queue size: %d/%d"
+              .formatted(userId, queueSize, REQUIRED_PLAYERS));
     }
 
     return players;
   }
 }
-

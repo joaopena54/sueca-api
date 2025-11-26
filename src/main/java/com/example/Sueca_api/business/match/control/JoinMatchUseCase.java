@@ -41,7 +41,6 @@ public class JoinMatchUseCase {
 
       String matchId = UUID.randomUUID().toString();
       log.log(Level.INFO, "Creating match %s with players: %s".formatted(matchId, players));
-
     }
   }
 }

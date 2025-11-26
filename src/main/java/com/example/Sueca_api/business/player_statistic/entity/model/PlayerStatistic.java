@@ -33,4 +33,3 @@ public class PlayerStatistic extends BaseEntity {
     this.user = user;
   }
 }
-

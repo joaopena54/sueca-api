@@ -70,8 +70,8 @@ public class MatchRedisGateway {
 
   // Matchmaking Queue Methods
   /**
-   * Atomically adds a player to the queue and returns 4 players if enough are ready.
-   * This is thread-safe and prevents race conditions.
+   * Atomically adds a player to the queue and returns 4 players if enough are ready. This is
+   * thread-safe and prevents race conditions.
    *
    * @param userId The user ID to add to the queue
    * @return List of 4 player IDs if enough players are ready, empty list otherwise
@@ -79,9 +79,7 @@ public class MatchRedisGateway {
   public List<String> addToQueueAndPopIfReady(String userId) {
     List<Object> result =
         redisTemplate.execute(
-            atomicPopScript,
-            Collections.singletonList(MATCHMAKING_QUEUE_KEY),
-            userId);
+            atomicPopScript, Collections.singletonList(MATCHMAKING_QUEUE_KEY), userId);
 
     if (result == null || result.isEmpty()) {
       return List.of();

@@ -20,4 +20,3 @@ public class PlayerStatisticsGateway {
     playerStatisticRepository.save(playerStatistic);
   }
 }
-
